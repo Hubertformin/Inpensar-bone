@@ -1,13 +1,13 @@
-import Users from "../models/users";
+import User from "../models/user";
 import {Router} from 'express';
 
 const UserRouter = Router();
 
 UserRouter.get('/', async (req, res) => {
-    // get all users
+    // get all User
     try {
     
-        const data = await Users.find();
+        const data = await User.find();
 
         res.status(200).json({data, success: true});
 
@@ -17,10 +17,10 @@ UserRouter.get('/', async (req, res) => {
 });
 
 UserRouter.get('/:uid', async (req, res) => {
-    // get all users
+    // get all User
     try {
     
-        const data = await Users.findOne({ uid: req.params.uid });
+        const data = await User.findOne({ uid: req.params.uid });
 
         res.status(200).json({data, success: true});
 
@@ -30,10 +30,10 @@ UserRouter.get('/:uid', async (req, res) => {
 });
 
 UserRouter.post('/', async (req, res) => {
-    // get all users
+    // get all User
     try {
     
-        const data = await Users.create(req.body);
+        const data = await User.create(req.body);
 
 
         res.status(200).json({data, success: true});
@@ -44,10 +44,10 @@ UserRouter.post('/', async (req, res) => {
 });
 
 UserRouter.put('/:id', async (req, res) => {
-    // get all users
+    // get all User
     try {
     
-        const data = await Users.updateOne({ _id: req.params.id }, req.body);
+        const data = await User.updateOne({ _id: req.params.id }, req.body);
 
 
         res.status(200).json({data, success: true});

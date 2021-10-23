@@ -13,7 +13,9 @@ import * as cors from 'cors';
 // import routers
 import UserRouter from './routers/user.router';
 import TransactionRouter from "./routers/transaction.router";
-import CategoryRouter from "./routers/categories.model";
+import CategoryRouter from "./routers/category.router";
+import WallerRouter from "./routers/wallet.routes";
+import BudgetRouter from "./routers/budget.router";
 
 
 const app = express();
@@ -24,7 +26,7 @@ app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Connect to database
-const MONGODB_URI = "mongodb+srv://nudle:nudle@cluster0.aahux.mongodb.net/coreDB?retryWrites=true&w=majority";
+const MONGODB_URI = "mongodb+srv://admin:root@cluster0.b51vv.mongodb.net/inpensarDB?retryWrites=true&w=majority";
 
 connect(MONGODB_URI, {
   // useNewUrlParser: true,
@@ -35,7 +37,7 @@ connect(MONGODB_URI, {
 
 
 connection.on("connected", () => {
-  console.log("[MONGOOSE]: onnected to database!");
+  console.log("[ORM]: onnected to database!");
 });
 
 app.use(logger('dev'));
@@ -48,6 +50,8 @@ app.use(cookieParser());
 app.use('/users', UserRouter);
 app.use('/transactions', TransactionRouter);
 app.use('/categories', CategoryRouter);
+app.use('/wallets', WallerRouter);
+app.use('/budgets', BudgetRouter);
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   next(createError(404));

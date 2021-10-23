@@ -1,9 +1,9 @@
-import Transaction from "../models/transaction";
+import Budget from '../models/budget';
 import {Router} from 'express';
 
-const TransactionRouter = Router();
+const BudgetRouter = Router();
 
-TransactionRouter.get('/', async (req, res) => {
+BudgetRouter.get('/', async (req, res) => {
     // get all users
     try {
 
@@ -11,7 +11,7 @@ TransactionRouter.get('/', async (req, res) => {
             res.status(500).json({message: "Please specify the user id", success: false})
         }
     
-        const data = await Transaction.find({ userId: req.query.userId });
+        const data = await Budget.find({ userId: req.query.userId });
 
         res.status(200).json({data, success: true});
 
@@ -20,11 +20,11 @@ TransactionRouter.get('/', async (req, res) => {
     }
 });
 
-TransactionRouter.get('/:id', async (req, res) => {
+BudgetRouter.get('/:id', async (req, res) => {
     // get all users
     try {
     
-        const data = await Transaction.findOne({ _id: req.params.id });
+        const data = await Budget.findOne({ _id: req.params.id });
 
         res.status(200).json({data, success: true});
 
@@ -33,24 +33,7 @@ TransactionRouter.get('/:id', async (req, res) => {
     }
 });
 
-TransactionRouter.post('/', async (req, res) => {
-    // get all users
-    try {
-
-        if (!req.query.userId) {
-            res.status(500).json({message: "Please specify the user id", success: false})
-        }
-    
-        const data = await Transaction.create({ ...req.body, userId: req.query.userId });
-
-        res.status(200).json({data, success: true});
-
-    } catch (e: any) {
-        res.status(500).json({message: e.toString(), success: false})
-    }
-});
-
-TransactionRouter.put('/:id', async (req, res) => {
+BudgetRouter.post('/', async (req, res) => {
     // get all users
     try {
 
@@ -58,7 +41,7 @@ TransactionRouter.put('/:id', async (req, res) => {
             res.status(500).json({message: "Please specify the user id", success: false})
         }
     
-        const data = await Transaction.updateOne({  _id: req.params.id, userId: req.query.userId }, req.body);
+        const data = await Budget.create({ ...req.body, userId: req.query.userId });
 
         res.status(200).json({data, success: true});
 
@@ -67,7 +50,7 @@ TransactionRouter.put('/:id', async (req, res) => {
     }
 });
 
-TransactionRouter.delete('/:id', async (req, res) => {
+BudgetRouter.put('/:id', async (req, res) => {
     // get all users
     try {
 
@@ -75,7 +58,7 @@ TransactionRouter.delete('/:id', async (req, res) => {
             res.status(500).json({message: "Please specify the user id", success: false})
         }
     
-        const data = await Transaction.deleteOne({  _id: req.params.id, userId: req.query.userId });
+        const data = await Budget.updateOne({  _id: req.params.id, userId: req.query.userId }, req.body);
 
         res.status(200).json({data, success: true});
 
@@ -84,4 +67,21 @@ TransactionRouter.delete('/:id', async (req, res) => {
     }
 });
 
-export default TransactionRouter;
+BudgetRouter.delete('/:id', async (req, res) => {
+    // get all users
+    try {
+
+        if (!req.query.userId) {
+            res.status(500).json({message: "Please specify the user id", success: false})
+        }
+    
+        const data = await Budget.deleteOne({  _id: req.params.id, userId: req.query.userId });
+
+        res.status(200).json({data, success: true});
+
+    } catch (e: any) {
+        res.status(500).json({message: e.toString(), success: false})
+    }
+});
+
+export default BudgetRouter;

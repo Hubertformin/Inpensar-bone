@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import Categories from '../models/categories';
+import Category from '../models/category';
 
 const CategoryRouter = Router();
 
@@ -7,7 +7,7 @@ CategoryRouter.get('/', async (req, res) => {
     // get all users
     try {
     
-        const data = await Categories.find();
+        const data = await Category.find();
 
         res.status(200).json({data, success: true});
 
@@ -20,7 +20,7 @@ CategoryRouter.get('/:uid', async (req, res) => {
     // get all users
     try {
     
-        const data = await Categories.findOne({ uid: req.params.uid });
+        const data = await Category.findOne({ uid: req.params.uid });
 
         res.status(200).json({data, success: true});
 
@@ -33,7 +33,7 @@ CategoryRouter.post('/', async (req, res) => {
     // get all users
     try {
     
-        const data = await Categories.create(req.body);
+        const data = await Category.create(req.body);
 
 
         res.status(200).json({data, success: true});
@@ -47,7 +47,7 @@ CategoryRouter.put('/:id', async (req, res) => {
     // get all users
     try {
     
-        const data = await Categories.updateOne({ _id: req.params.id }, req.body);
+        const data = await Category.updateOne({ _id: req.params.id }, req.body);
 
 
         res.status(200).json({data, success: true});
